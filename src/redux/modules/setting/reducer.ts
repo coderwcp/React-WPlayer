@@ -2,8 +2,12 @@ import { AnyAction } from "redux";
 import { produce } from "immer";
 import * as types from "../../types";
 
+export type Language = "zh-CN" | "en-US";
+export type Theme = "light" | "dark";
+
 export type SettingState = {
-	language: "zh-CN" | "en-US";
+	language: Language;
+	theme: Theme;
 };
 
 // 全局数据
@@ -68,10 +72,15 @@ const defaultSettingState = {
 };
 
 export default function site(state = defaultSettingState, action: AnyAction) {
-	return produce(state, draftState => {
+	return produce(state, (draftState: SettingState) => {
 		switch (action.type) {
+			// 切换多语言
 			case types.SET_LANGUAGE:
 				draftState.language = action.payload;
+				break;
+			// 切换明暗主题
+			case types.SET_THEME:
+				draftState.theme = draftState.theme === "dark" ? "light" : "dark";
 				break;
 			default:
 				return draftState;

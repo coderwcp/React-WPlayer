@@ -2,6 +2,7 @@ import { defineConfig, ConfigEnv, UserConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import { createHtmlPlugin } from "vite-plugin-html";
+import { VitePWA } from "vite-plugin-pwa";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
@@ -28,6 +29,46 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 						keywords: loadEnv(mode, process.cwd()).VITE_SITE_KEYWORDS,
 						description: loadEnv(mode, process.cwd()).VITE_SITE_DES
 					}
+				}
+			}),
+			VitePWA({
+				registerType: "autoUpdate",
+				workbox: {
+					clientsClaim: true,
+					skipWaiting: true,
+					cleanupOutdatedCaches: true,
+					runtimeCaching: [
+						{
+							urlPattern: /(.*?)\.(woff2|woff|ttf)/,
+							handler: "CacheFirst",
+							options: {
+								cacheName: "file-cache"
+							}
+						},
+						{
+							urlPattern: /(.*?)\.(webp|png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/,
+							handler: "CacheFirst",
+							options: {
+								cacheName: "image-cache"
+							}
+						}
+					]
+				},
+				manifest: {
+					name: viteEnv.VITE_SITE_TITLE,
+					short_name: viteEnv.VITE_SITE_TITLE,
+					description: viteEnv.VITE_SITE_DES,
+					display: "standalone",
+					start_url: "/",
+					theme_color: "#fff",
+					background_color: "#efefef",
+					icons: [
+						{
+							src: "/images/logo/favicon.png",
+							sizes: "200x200",
+							type: "image/png"
+						}
+					]
 				}
 			})
 		],

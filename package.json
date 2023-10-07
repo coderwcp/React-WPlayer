@@ -10,7 +10,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"antd-mobile": "^5.32.4",
+		"antd": "^5.9.4",
 		"axios": "^1.5.0",
 		"i18next": "^23.5.1",
 		"i18next-browser-languagedetector": "^7.1.0",
@@ -53,7 +53,8 @@
 		"typescript": "^5.2.2",
 		"vite": "^4.4.9",
 		"vite-plugin-eslint": "^1.8.1",
-		"vite-plugin-html": "^3.2.0"
+		"vite-plugin-html": "^3.2.0",
+		"vite-plugin-pwa": "^0.16.5"
 	},
 	"presets": [
 		[

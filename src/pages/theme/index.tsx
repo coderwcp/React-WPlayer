@@ -3,11 +3,17 @@ import { connect } from "react-redux";
 import themeConfigData from "@/config/themeColor.json";
 
 const Theme = () => {
+	type themeConfigDataKeys = keyof typeof themeConfigData;
+
 	return (
 		<>
-			{Object.entries(themeConfigData).forEach(item => {
-				return <div>{item[0]}</div>;
-			})}
+			<div>主题</div>
+			<span>
+				{Object.keys(themeConfigData).map(key => {
+					const _key = key as themeConfigDataKeys;
+					return <div key={_key}>{themeConfigData[_key].name}</div>;
+				})}
+			</span>
 		</>
 	);
 };

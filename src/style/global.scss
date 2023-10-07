@@ -20,6 +20,11 @@ button {
 	font-family: "PingFang", sans-serif !important;
 }
 
+html,
+body {
+	margin: 0;
+}
+
 // 文本超出隐藏
 .text-hidden {
 	display: -webkit-box !important;

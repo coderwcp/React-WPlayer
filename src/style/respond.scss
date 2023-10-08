@@ -1,0 +1,42 @@
+@use "sass:map";
+@use "sass:list";
+
+$breakpoints: (
+	"xs": (
+		0,
+		639px
+	),
+	"s": (
+		640px,
+		1023px
+	),
+	"m": (
+		1024px,
+		1279px
+	),
+	"l": (
+		1280px,
+		1535px
+	),
+	"xl": (
+		1536px,
+		1919px
+	),
+	"xxl": 1920px
+);
+
+@mixin respond-to($breakname) {
+	$bp: map.get($breakpoints, $breakname);
+
+	@if type-of($bp) == "list" {
+		$min: list.nth($bp, 1);
+		$max: list.nth($bp, 2);
+		@media (min-width: $min) and (max-width: $max) {
+			@content;
+		}
+	} @else {
+		@media (min-width: $bp) {
+			@content;
+		}
+	}
+}

@@ -1,22 +1,66 @@
-import { AnyAction } from "redux";
 import { produce } from "immer";
+import themeTypeData from "@/config/themeColor.json";
 import * as types from "../../types";
+import { CustomActionType } from "@/redux/interface";
 
 export type Language = "zh-CN" | "en-US";
 export type Theme = "light" | "dark";
+export type ThemeType = keyof typeof themeTypeData;
+export type ThemeData = {
+	name: string;
+	label: ThemeType;
+	primaryColor: string;
+	primaryColorHover: string;
+	primaryColorSuppl: string;
+	primaryColorPressed: string;
+} | null;
+export type ListClickMode = "click" | "dblclick";
+export type PlayerStyle = "cover";
+export type SongLevel = "exhigh";
+export type LyricsPosition = "left";
+export type LyricsBlock = "start";
+export type BackgroundImageShow = "blur";
 
 export type SettingState = {
 	language: Language;
 	theme: Theme;
+	themeType: ThemeType;
+	themeData: ThemeData;
+	searchHistory: boolean;
+	themeAuto: boolean;
+	bannerShow: boolean;
+	autoSignIn: boolean;
+	bottomLyricShow: boolean;
+	showYrc: boolean;
+	showYrcAnimation: boolean;
+	showYrcTransform: boolean;
+	showTransl: boolean;
+	showRoma: boolean;
+	lyricsBlur: boolean;
+	musicFrequency: boolean;
+	lrcMousePause: boolean;
+	useUnmServer: boolean;
+	countDownShow: boolean;
+	showLyricSetting: boolean;
+	songVolumeFade: boolean;
+	memoryLastPlaybackPosition: boolean;
+	listClickMode: ListClickMode;
+	playerStyle: PlayerStyle;
+	songLevel: SongLevel;
+	lyricsPosition: LyricsPosition;
+	lyricsBlock: LyricsBlock;
+	backgroundImageShow: BackgroundImageShow;
+	lyricsFontSize: number;
+	listNumber: number;
 };
 
 // 全局数据
-const defaultSettingState = {
+const defaultSettingState: SettingState = {
 	// 全局主题
 	theme: "light",
 	themeAuto: true,
 	themeType: "red",
-	themeData: {},
+	themeData: null,
 	// 搜索历史
 	searchHistory: true,
 	// 轮播图显示
@@ -71,7 +115,7 @@ const defaultSettingState = {
 	language: "zh-CN"
 };
 
-export default function site(state = defaultSettingState, action: AnyAction) {
+export default function site(state = defaultSettingState, action: CustomActionType) {
 	return produce(state, (draftState: SettingState) => {
 		switch (action.type) {
 			// 切换多语言
@@ -81,6 +125,9 @@ export default function site(state = defaultSettingState, action: AnyAction) {
 			// 切换明暗主题
 			case types.SET_THEME:
 				draftState.theme = draftState.theme === "dark" ? "light" : "dark";
+				break;
+			case types.SET_THEME_TYPE:
+				draftState.themeType = action.payload;
 				break;
 			default:
 				return draftState;

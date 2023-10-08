@@ -36,11 +36,16 @@ body {
 
 // 响应式布局
 @mixin changeWidth($padding: 10vw) {
-	.n-layout-header {
+	.ant-layout {
+		transition: all 0.3s;
+	}
+	.ant-layout-header {
+		background: unset;
+		box-shadow: 0 1px 0px 0 red;
 		padding: 0 $padding;
 	}
 
-	.n-layout-content {
+	.ant-layout-content {
 		.main {
 			padding: 24px $padding 54px $padding;
 			.player {

@@ -15,6 +15,15 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				"vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
 			}
 		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `
+              @import "@/style/respond.scss";
+          `
+				}
+			}
+		},
 		plugins: [
 			react(),
 			createHtmlPlugin({

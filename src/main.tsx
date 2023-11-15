@@ -1,12 +1,13 @@
 import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
-import "./style/global.scss";
+import "@/style/global.scss";
+import "@/style/customAntDesign.scss";
 import "@/locales/index.ts";
 import { Provider } from "react-redux";
-import { persistor, store } from "./redux/index";
+import { persistor, store } from "@/redux/index";
 import { PersistGate } from "redux-persist/integration/react";
-import NProgress from "./api/helper/NProgress.ts";
+import NProgress from "@/api/helper/NProgress.ts";
 import { message } from "antd";
 
 // 全局对象

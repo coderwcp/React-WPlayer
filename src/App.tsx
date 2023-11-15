@@ -1,4 +1,14 @@
-import { Button, Card, ConfigProvider, DatePicker, DatePickerProps, Layout, Typography, theme as antdTheme } from "antd";
+import {
+	Button,
+	Card,
+	ConfigProvider,
+	DatePicker,
+	DatePickerProps,
+	Layout,
+	Typography,
+	theme as antdTheme,
+	App as AntApp
+} from "antd";
 import { useTranslation } from "react-i18next";
 import { setLanguage, setTheme } from "./redux/modules/setting/action";
 import { connect } from "react-redux";
@@ -63,4 +73,12 @@ function App(props: Props) {
 const mapStateToProps = (state: StoreState) => state.setting;
 const mapDispatchToProps = { setLanguage, setTheme };
 const ConnectApp = connect(mapStateToProps, mapDispatchToProps)(App);
-export default ConnectApp;
+
+// 使用 App 组件包裹,使用hook的message\modal\notification才能根据主题切换样式
+const WrapperApp = () => (
+	<AntApp message={{ maxCount: 1 }}>
+		<ConnectApp />
+	</AntApp>
+);
+
+export default WrapperApp;

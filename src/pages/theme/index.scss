@@ -24,6 +24,9 @@
 			height: 60px;
 		}
 		&.current-theme::before {
+			opacity: 1;
+		}
+		&::before {
 			position: absolute;
 			content: "";
 			top: -4px;
@@ -32,6 +35,8 @@
 			bottom: -4px;
 			border: 2px solid var(--border-color);
 			border-radius: 12px;
+			opacity: 0;
+			transition: opacity 0.3s;
 		}
 	}
 }

@@ -1,4 +1,12 @@
-.main {
-	max-width: 1400px;
-	margin: 0 auto;
+.layout-header {
+	height: 60px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+.layout-content {
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }

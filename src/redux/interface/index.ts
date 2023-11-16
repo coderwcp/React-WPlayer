@@ -1,5 +1,5 @@
 import { AnyAction } from "redux";
 
-export interface CustomActionType extends AnyAction {
-	payload: any;
+export interface CustomActionType<T = any> extends AnyAction {
+	payload: T;
 }

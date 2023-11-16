@@ -1,4 +1,12 @@
-export type MusicState = {};
+export type MusicState = {
+	showBigPlayer: boolean; // 是否展示播放界面
+	showPlayBar: boolean; // 是否展示播放控制条
+	showPlayList: boolean; // 是否展示播放列表
+	playState: boolean; // 播放状态
+	persistData: {
+		playlists: any[]; // 播放列表
+	};
+};
 
 // 默认音乐数据
 export const defaultMusicState = {

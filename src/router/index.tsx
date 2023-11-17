@@ -1,11 +1,11 @@
-import Login from "@/pages/login";
 import { Navigate, useRoutes } from "react-router-dom";
 import { RouteObject } from "./interface";
 import NotFound from "@/components/NotFound/index";
-import homeRouter from "./modules/home";
+import Home from "@/pages/home";
+import searchRouter from "./modules/search";
 
 const resolvedModules = {
-	homeRouter
+	searchRouter
 };
 
 export const routerArray: RouteObject[] = [];
@@ -18,9 +18,12 @@ Object.values(resolvedModules).forEach(item => {
 export const rootRouter: RouteObject[] = [
 	{
 		path: "/",
-		element: <Navigate to="/login" />
+		element: <Navigate to="/home" />
 	},
-	{ path: "/login", element: <Login /> },
+	{
+		path: "/home",
+		element: <Home />
+	},
 	...routerArray,
 	{ path: "*", element: <NotFound /> }
 ];

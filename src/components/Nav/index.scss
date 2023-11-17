@@ -16,7 +16,6 @@ nav {
 		@media (max-width: 990px) {
 			flex: initial;
 		}
-
 		.logo {
 			display: flex;
 			align-items: center;
@@ -38,6 +37,58 @@ nav {
 			&:active {
 				transform: scale(1);
 			}
+		}
+		.controls {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			.anticon {
+				margin: 0 4px;
+				border-radius: 8px;
+				padding: 4px;
+				cursor: pointer;
+				transition: all 0.3s;
+				@media (min-width: 640px) {
+					&:hover {
+						background-color: pink;
+					}
+				}
+				&:active {
+					transform: scale(0.95);
+				}
+			}
+		}
+	}
+
+	.center {
+		flex: 1;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		@media (max-width: 768px) {
+			display: none;
+		}
+		.link {
+			display: block;
+			height: unset;
+			padding: 6px 16px;
+			margin: 0 2px;
+			border-radius: 8px;
+			transition: all 0.3s;
+			cursor: pointer;
+			&:hover {
+				background-color: var(--main-color);
+				color: rgba(255, 255, 255, 0.9);
+			}
+			&:active {
+				transform: scale(0.95);
+			}
+		}
+
+		.router-link-active {
+			background-color: var(--main-color);
+			color: rgba(255, 255, 255, 0.9);
 		}
 	}
 }

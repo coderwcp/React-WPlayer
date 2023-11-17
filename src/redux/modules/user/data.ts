@@ -5,6 +5,8 @@ export type UserState = {
 	userLogin: boolean; // 是否登陆
 	cookie: string; // 登录凭证
 	userData: UserData; // 用户数据
+	// 用户详情数据
+	userOtherData: {};
 };
 
 // 默认用户数据

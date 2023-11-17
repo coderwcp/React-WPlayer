@@ -1,7 +1,7 @@
 import "./App.scss";
 import { Button, Card, ConfigProvider, DatePicker, DatePickerProps, Layout, theme as antdTheme, App as AntApp } from "antd";
 import { useTranslation } from "react-i18next";
-import { setLanguage, setTheme } from "@/redux/modules/setting/action";
+import { setLanguage, setTheme, setThemeData } from "@/redux/modules/setting/action";
 import { connect } from "react-redux";
 import { StoreState } from "@/redux";
 import ConnectTheme from "@/pages/theme";
@@ -11,48 +11,22 @@ import Nav from "@/components/Nav";
 import { HashRouter } from "react-router-dom";
 import AuthRouter from "@/router/authRouter";
 import Router from "@/router";
-import { ThemeType } from "./redux/modules/setting/reducer";
+import { ThemeData, ThemeType } from "./redux/modules/setting/reducer";
 import themeTypeData from "@/config/themeColor.json";
 import { useEffect, useState } from "react";
+import { AliasToken } from "antd/lib/theme/internal";
 
 const { Header, Content } = Layout;
 
 type Props = StoreState & { setTheme: () => any };
 
 function _App(props: Props) {
-	const [themeToken, setThemeToken] = useState<{ token: String }>();
-	console.log(themeToken, setThemeToken);
-
-	const changeThemeColor = (val: ThemeType | "custom") => {
-		let color = null;
-		if (val !== "custom") {
-			color = themeTypeData[val];
-			console.log("当前主题色：" + val, color);
-			// setThemeToken({
-			// 	token: "color"
-			// });
-			// setting.themeData = color;
-		} else {
-			// color = setting.themeData;
-			// console.log("当前主题色为自定义：" + val, color);
-			// themeOverrides.value = {
-			// 	common: color
-			// };
-		}
-		// setCssVariable("--main-color", color.primaryColor);
-		// setCssVariable("--main-second-color", color.primaryColor + "1f");
-		// setCssVariable("--main-boxshadow-color", color.primaryColor + "26");
-		// setCssVariable("--main-boxshadow-hover-color", color.primaryColor + "05");
-	};
-
-	useEffect(() => {
-		changeThemeColor("red");
-	}, []);
+	const [themeToken, setThemeToken] = useState<Partial<AliasToken>>();
 
 	const { t } = useTranslation();
 	// redux 中的数据 & 映射action
 	const { setTheme } = props;
-	const { language, theme } = props.setting;
+	const { language, theme, themeType, themeData } = props.setting;
 	const {
 		persistData: { playlists },
 		playState
@@ -69,14 +43,44 @@ function _App(props: Props) {
 
 	const flag = playlists[0] && playState;
 
+	// 修改全局颜色
+	const setCssVariable = (name: string, value: string) => {
+		document.documentElement.style.setProperty(name, value);
+	};
+
+	// 配置主题色
+	const changeThemeColor = (val: ThemeType | "custom") => {
+		let color: ThemeData;
+		if (val !== "custom") {
+			color = themeTypeData[val] as ThemeData;
+			console.log("当前主题色：" + val, color);
+			setThemeToken({
+				colorPrimary: color!.primaryColor
+			});
+			setThemeData(color);
+		} else {
+			color = themeData;
+			console.log("当前主题色为自定义：" + val, color);
+			setThemeToken({
+				colorPrimary: color!.primaryColor
+			});
+		}
+		setCssVariable("--main-color", color!.primaryColor);
+		setCssVariable("--main-second-color", color!.primaryColor + "1f");
+		setCssVariable("--main-boxshadow-color", color!.primaryColor + "26");
+		setCssVariable("--main-boxshadow-hover-color", color!.primaryColor + "05");
+	};
+
+	useEffect(() => {
+		changeThemeColor(themeType);
+	}, [themeType]);
+
 	return (
 		<HashRouter>
 			<ConfigProvider
 				locale={i18nLocale}
 				theme={{
-					token: {
-						colorPrimary: "red"
-					},
+					token: themeToken,
 					algorithm: antdTheme[theme === "dark" ? "darkAlgorithm" : "defaultAlgorithm"]
 				}}
 			>

@@ -13,8 +13,9 @@ function _Nav(props: StoreState) {
 
 	// 下拉框数据
 	const [discoverOptions, setDiscoverOptions] = useState<MenuProps["items"]>([]);
+	const [userOptions, setUserOptions] = useState<MenuProps["items"]>([]);
 
-	useEffect(() => {
+	const setDiscoverOptionsHandle = () => {
 		setDiscoverOptions([
 			{
 				label: t("nav.discoverChildren.playlists"),
@@ -29,6 +30,23 @@ function _Nav(props: StoreState) {
 				key: "/discover/artists"
 			}
 		]);
+	};
+	const setUserOptionsHandle = (val: boolean) => {
+		setUserOptions(
+			val
+				? []
+				: [
+						{
+							label: "登录",
+							key: "/login"
+						}
+				  ]
+		);
+	};
+
+	useEffect(() => {
+		setDiscoverOptionsHandle();
+		setUserOptionsHandle(false);
 	}, [language]);
 
 	return (
@@ -50,7 +68,12 @@ function _Nav(props: StoreState) {
 				</Button>
 				<Dropdown menu={{ items: discoverOptions }} placement="bottom" arrow>
 					<Button type="primary" className="link">
-						bottom
+						发现
+					</Button>
+				</Dropdown>
+				<Dropdown menu={{ items: userOptions }} placement="bottom" arrow>
+					<Button type="primary" className="link">
+						音乐库
 					</Button>
 				</Dropdown>
 			</div>

@@ -126,8 +126,13 @@ export default function site(state = defaultSettingState, action: CustomActionTy
 			case types.SET_THEME:
 				draftState.theme = draftState.theme === "dark" ? "light" : "dark";
 				break;
+			// 设置主题类型
 			case types.SET_THEME_TYPE:
 				draftState.themeType = action.payload;
+				break;
+			// 设置主题颜色
+			case types.SET_THEME_DATA:
+				draftState.themeData = action.payload;
 				break;
 			default:
 				return draftState;

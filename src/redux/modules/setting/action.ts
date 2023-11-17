@@ -1,5 +1,5 @@
 import * as types from "../../types";
-import { Language, ThemeType } from "./reducer";
+import { Language, ThemeData, ThemeType } from "./reducer";
 
 /**
  * 设置多语言
@@ -19,5 +19,12 @@ export const setTheme = () => ({
  */
 export const setThemeType = (payload: ThemeType) => ({
 	type: types.SET_THEME_TYPE,
+	payload
+});
+/**
+ * 设置主题颜色
+ */
+export const setThemeData = (payload: ThemeData) => ({
+	type: types.SET_THEME_DATA,
 	payload
 });

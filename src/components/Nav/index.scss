@@ -93,4 +93,38 @@ nav {
 			color: rgba(255, 255, 255, 0.9);
 		}
 	}
+
+	.right {
+		flex: 1;
+		max-width: 300px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
+		@media (max-width: 520px) {
+			position: absolute;
+			right: 12px;
+		}
+		.avatar {
+			width: 30px;
+			min-width: 30px;
+			height: 30px;
+			margin-left: 12px;
+			box-shadow: 0 4px 12px -2px rgb(0 0 0 / 10%);
+			cursor: pointer;
+		}
+		.mb-menu {
+			margin-left: 12px;
+			display: none;
+			@media (max-width: 768px) {
+				display: flex;
+			}
+		}
+	}
+}
+
+.user-option {
+	.ant-dropdown-arrow {
+		right: 8px;
+	}
 }

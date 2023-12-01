@@ -3,6 +3,7 @@ import { RouteObject } from "./interface";
 import NotFound from "@/components/NotFound/index";
 import Home from "@/pages/home";
 import searchRouter from "./modules/search";
+import Login from "@/pages/login";
 
 const resolvedModules = {
 	searchRouter
@@ -23,6 +24,10 @@ export const rootRouter: RouteObject[] = [
 	{
 		path: "/home",
 		element: <Home />
+	},
+	{
+		path: "/login",
+		element: <Login />
 	},
 	...routerArray,
 	{ path: "*", element: <NotFound /> }

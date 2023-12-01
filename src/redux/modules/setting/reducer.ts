@@ -132,6 +132,8 @@ export default function site(state = defaultSettingState, action: CustomActionTy
 				break;
 			// 设置主题颜色
 			case types.SET_THEME_DATA:
+				console.log("11", action.payload);
+
 				draftState.themeData = action.payload;
 				break;
 			default:

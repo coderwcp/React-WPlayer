@@ -1,5 +1,7 @@
 // 用户数据
-export interface UserData {}
+export interface UserData {
+	avatarUrl: string;
+}
 
 export type UserState = {
 	userLogin: boolean; // 是否登陆

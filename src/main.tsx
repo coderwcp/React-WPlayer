@@ -1,4 +1,4 @@
-import React, { StrictMode } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "@/style/global.scss";
@@ -12,17 +12,16 @@ import { message } from "antd";
 
 // 全局对象
 window.$loadingBar = NProgress;
+window.$message = message;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<Provider store={store}>
-			<PersistGate persistor={persistor}>
-				<React.StrictMode>
-					<App />
-				</React.StrictMode>
-			</PersistGate>
-		</Provider>
-	</StrictMode>
+	// <StrictMode>
+	<Provider store={store}>
+		<PersistGate persistor={persistor}>
+			<App />
+		</PersistGate>
+	</Provider>
+	// </StrictMode>
 );
 
 if ("serviceWorker" in navigator) {

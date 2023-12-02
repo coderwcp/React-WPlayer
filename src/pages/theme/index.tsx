@@ -4,16 +4,16 @@ import themeTypeData from "@/config/themeColor.json";
 import "./index.scss";
 import { CSSProperties } from "react";
 import { SettingState, ThemeData, ThemeType } from "@/redux/modules/setting/reducer";
-import { setThemeType } from "@/redux/modules/setting/action";
+import { setThemeData, setThemeType } from "@/redux/modules/setting/action";
 import { CustomActionType } from "@/redux/interface";
 import { Typography, App, Button } from "antd";
 
-type Props = SettingState & { setThemeType: (val: ThemeType) => CustomActionType };
+type Props = SettingState & { setThemeType: (val: ThemeType) => CustomActionType; setThemeData: (val: ThemeData) => any };
 
 const { Text } = Typography;
 
 const Theme = (props: Props) => {
-	const { themeType, setThemeType } = props;
+	const { themeType, setThemeType, setThemeData } = props;
 	const {
 		modal: { confirm },
 		message: { success }
@@ -35,6 +35,7 @@ const Theme = (props: Props) => {
 			success("主题色更换为 " + data!.name);
 			setThemeType(data!.label);
 		}
+		setThemeData(data);
 	};
 
 	return (
@@ -65,16 +66,7 @@ const Theme = (props: Props) => {
 };
 
 const mapStateToProps = (state: StoreState) => state.setting;
-const mapDispatchToProps = { setThemeType };
+const mapDispatchToProps = { setThemeType, setThemeData };
 const ConnectTheme = connect(mapStateToProps, mapDispatchToProps)(Theme);
-
-// 使用 App 组件包裹,使用hook的message\modal\notification才能根据主题切换样式
-// const ThemeApp = () => {
-// 	return (
-// 		<App message={{ maxCount: 1 }}>
-// 			<ConnectTheme />
-// 		</App>
-// 	);
-// };
 
 export default ConnectTheme;

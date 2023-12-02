@@ -25,6 +25,17 @@ body {
 	margin: 0;
 }
 
+div#nprogress {
+	.bar {
+		background: var(--main-color);
+	}
+	.peg {
+		box-shadow:
+			0 0 10px var(--main-color),
+			0 0 5px var(--main-color);
+	}
+}
+
 // 文本超出隐藏
 .text-hidden {
 	display: -webkit-box !important;

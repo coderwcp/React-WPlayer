@@ -21,7 +21,6 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 	const { t } = useTranslation();
 
 	const location = useLocation();
-	console.log(location.pathname);
 
 	const navigate = useNavigate();
 
@@ -136,7 +135,6 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 	const mbUserClickHandle: MenuProps["onClick"] = ({ key }) => {
 		const keyMap = {
 			loginStatus() {
-				console.log("loginStatus");
 				navigate("/login");
 			},
 			changeTheme() {

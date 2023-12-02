@@ -10,6 +10,7 @@ export default function user(state = defaultUserState, action: CustomActionType)
 			// case types.SET_LANGUAGE:
 			// 	draftState.showBigPlayer = action.payload;
 			// 	break;
+
 			default:
 				return draftState;
 		}

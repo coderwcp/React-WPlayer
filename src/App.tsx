@@ -45,14 +45,12 @@ function _App(props: Props) {
 		let color: ThemeData;
 		if (val !== "custom") {
 			color = themeTypeData[val] as ThemeData;
-			console.log("当前主题色：" + val, color);
 			setThemeToken({
 				colorPrimary: color!.primaryColor
 			});
 			setThemeData(color);
 		} else {
 			color = themeData;
-			console.log("当前主题色为自定义：" + val, color);
 			setThemeToken({
 				colorPrimary: color!.primaryColor
 			});

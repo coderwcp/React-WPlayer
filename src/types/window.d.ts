@@ -6,7 +6,8 @@ declare global {
 	interface Window {
 		__REDUX_DEVTOOLS_EXTENSION_COMPOSE__: any;
 		$loadingBar: NProgress;
-		$message: message;
+		$message: typeof message;
+		qrCheckInterval: Function;
 	}
 	interface Navigator {
 		browserLanguage: string;

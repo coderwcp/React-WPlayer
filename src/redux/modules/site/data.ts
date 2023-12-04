@@ -1,4 +1,6 @@
-export type SiteState = {};
+export type SiteState = {
+	searchInputActive: boolean;
+};
 
 // 默认站点数据
 export const defaultSiteState = {

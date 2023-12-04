@@ -1,13 +1,13 @@
 import "./index.scss";
 import { StoreState } from "@/redux";
 import { connect } from "react-redux";
-import { AlertOutlined, AppstoreOutlined, HomeOutlined, LeftOutlined, MenuOutlined, RightOutlined } from "@ant-design/icons";
+import { AlertOutlined, AppstoreOutlined, HomeOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, MenuProps, Space, Typography, Flex } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import SearchInp from "../SearchInp";
-import MyIcon from "../SvgIcon";
+import SvgIcon from "../SvgIcon";
 import { setTheme } from "@/redux/modules/setting/action";
 
 const { Text } = Typography;
@@ -19,8 +19,6 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 	const { userData } = props.user;
 	const logoUrl = import.meta.env.VITE_SITE_LOGO;
 	const { t } = useTranslation();
-
-	const location = useLocation();
 
 	const navigate = useNavigate();
 
@@ -109,25 +107,25 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 				key: "changeTheme",
 				icon:
 					theme === "dark" ? (
-						<MyIcon type="icon-sun-foggy-line" style={{ fontSize: "16px" }} />
+						<SvgIcon type="icon-sun-foggy-line" style={{ fontSize: "16px" }} />
 					) : (
-						<MyIcon type="icon-moon-clear-line" style={{ fontSize: "16px" }} />
+						<SvgIcon type="icon-moon-clear-line" style={{ fontSize: "16px" }} />
 					)
 			},
 			{
 				label: "播放历史",
 				key: "history",
-				icon: <MyIcon type="icon-history-line" style={{ fontSize: "16px" }} />
+				icon: <SvgIcon type="icon-history-line" style={{ fontSize: "16px" }} />
 			},
 			{
 				label: "全局设置",
 				key: "setting",
-				icon: <MyIcon type="icon-settings-2-line" style={{ fontSize: "16px" }} />
+				icon: <SvgIcon type="icon-settings-2-line" style={{ fontSize: "16px" }} />
 			},
 			{
 				label: "登录账号",
 				key: "user",
-				icon: <MyIcon type="icon-logout-box-r-line" style={{ fontSize: "16px" }} />
+				icon: <SvgIcon type="icon-logout-box-r-line" style={{ fontSize: "16px" }} />
 			}
 		]);
 	};
@@ -192,8 +190,8 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 			<div className="right">
 				<Space wrap size={12}>
 					<SearchInp />
-					<Dropdown menu={{ selectable: false, items: mbMenuOptions }} placement="bottom" arrow>
-						<Button shape="circle" icon={<MenuOutlined />} />
+					<Dropdown className="mb-menu" menu={{ selectable: false, items: mbMenuOptions }} placement="bottom" arrow>
+						<Button shape="circle" icon={<SvgIcon type="icon-menu-line" />} />
 					</Dropdown>
 					<Dropdown
 						menu={{ selectable: false, items: mbUserOptions, onClick: mbUserClickHandle }}

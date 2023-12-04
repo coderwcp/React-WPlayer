@@ -5,3 +5,4 @@ export const SET_SHOW_BIG_PLAYER = "SET_SHOW_BIG_PLAYER";
 export const SET_USER_DATA = "SET_USER_DATA"; // 设置用户信息
 export const SET_THEME_DATA = "SET_THEME_DATA"; // 设置主题配色
 export const SET_USER_LOGIN = "SET_USER_LOGIN"; // 设置用户登录状态
+export const SET_SEARCH_INPUT_ACTIVE = "SET_SEARCH_INPUT_ACTIVE"; // 设置用户登录状态

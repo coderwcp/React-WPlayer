@@ -17,7 +17,7 @@ export const setTheme = () => ({
 /**
  * 设置主题类型
  */
-export const setThemeType = (payload: ThemeType) => ({
+export const setThemeType = (payload: ThemeType | "custom") => ({
 	type: types.SET_THEME_TYPE,
 	payload
 });

@@ -53,3 +53,17 @@ export const getBrowserLang = () => {
 	}
 	return defaultBrowserLang;
 };
+
+/**
+ * 防抖函数
+ */
+type DebounceFunction = (...args: any[]) => void;
+export const debounce = (func: DebounceFunction, delay: number): DebounceFunction => {
+	let timeoutId: ReturnType<typeof setTimeout>;
+	return (...args: any[]): void => {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => {
+			func(args);
+		}, delay);
+	};
+};

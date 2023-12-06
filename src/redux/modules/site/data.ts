@@ -1,4 +1,5 @@
 export type SiteState = {
+	siteTitle: string;
 	searchInputActive: boolean;
 };
 

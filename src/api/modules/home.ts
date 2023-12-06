@@ -1,5 +1,5 @@
 import http from "..";
 
-export const getBanner = () => {
+export const getBannerApi = () => {
 	return http.get("/banner");
 };

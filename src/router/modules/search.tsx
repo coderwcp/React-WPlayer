@@ -11,7 +11,7 @@ const searchRouter: Array<RouteObject> = [
 		children: [
 			{
 				path: "songs",
-				element: <></>
+				element: <>4654</>
 			}
 		]
 	}

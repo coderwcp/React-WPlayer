@@ -2,9 +2,9 @@ import { Dispatch } from "react";
 import * as types from "../../types";
 import {} from "./reducer";
 import getLanguageData from "@/utils/getLanguageData";
-import { getUserLevel, getUserSubcount } from "@/api/modules/user";
+import { getUserLevelApi, getUserSubcountApi } from "@/api/modules/user";
 import { UserData } from "./data";
-// import { getLoginState, getQrKey } from "@/api/modules/login";
+// import { getLoginStateApi, getQrKeyApi } from "@/api/modules/login";
 // import i18next from "i18next";
 // import { useNavigate } from "react-router-dom";
 /**
@@ -18,7 +18,7 @@ interface MenuProps {
 export const setUserOtherData = (userLogin: boolean) => {
 	return async (dispatch: Dispatch<MenuProps>) => {
 		if (userLogin) {
-			const getOtherData = [getUserLevel(), getUserSubcount()];
+			const getOtherData = [getUserLevelApi(), getUserSubcountApi()];
 			Promise.all(getOtherData)
 				.then(res => {
 					console.log(res);
@@ -54,9 +54,9 @@ export const setUserLogin = (payload: boolean) => ({
 /**
  * 获取二维码登录 key
  */
-// export const getQrKeyData = async () => {
+// export const getQrKeyApiData = async () => {
 // 	return async (dispatch: Dispatch<{}>) => {
-// 		getLoginState().then(res => {
+// 		getLoginStateApi().then(res => {
 // 			if (res.data.profile && window.localStorage.getItem("cookie")) {
 // 				window.$message.info(i18next.t("login.loggedIn"));
 // 				dispatch(setUserLogin(true));
@@ -65,10 +65,10 @@ export const setUserLogin = (payload: boolean) => ({
 // 			} else {
 // 				dispatch(userLogOut());
 // 				// clearInterval(qrCheckInterval.value);
-// 				getQrKey().then(res => {
+// 				getQrKeyApi().then(res => {
 // 					if (res.code == 200) {
 // 						qrImg.value = `https://music.163.com/login?codekey=${res.data.unikey}`;
-// 						checkQrState(res.data.unikey);
+// 						checkQrApiState(res.data.unikey);
 // 					} else {
 // 						window.$message.error(i18next.t("login.qrText6"));
 // 					}

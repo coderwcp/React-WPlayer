@@ -28,7 +28,7 @@ function _App(props: Props) {
 	return (
 		<>
 			Home
-			<Button type="primary" color="primary" onClick={() => changeLanguage(language === "en-US" ? "zh-CN" : "en-US")}>
+			{/* <Button type="primary" color="primary" onClick={() => changeLanguage(language === "en-US" ? "zh-CN" : "en-US")}>
 				切换中英文
 			</Button>
 			<Button type="primary" color="primary" onClick={() => setTheme()}>
@@ -49,7 +49,7 @@ function _App(props: Props) {
 			<ConnectTheme />
 			<div>{t("hello")}</div>
 			<DatePicker onChange={onChange} />
-			<Card>456465465</Card>
+			<Card>456465465</Card> */}
 		</>
 	);
 }

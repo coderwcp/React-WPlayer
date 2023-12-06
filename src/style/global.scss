@@ -51,8 +51,16 @@ div#nprogress {
 		transition: all 0.3s;
 	}
 	.ant-layout-header {
+		position: relative;
 		background: unset;
-		box-shadow: 0 1px 0px 0 red;
+		box-shadow: 0 1px 0px 0 transparent;
+		> .ant-divider {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: 0;
+		}
 		padding: 0 $padding;
 	}
 

@@ -8,10 +8,12 @@ export default function site(state = defaultSiteState, actions: CustomActionType
 		const map = {
 			[types.SET_SEARCH_INPUT_ACTIVE]: () => {
 				draftState.searchInputActive = actions.payload;
+			},
+			[types.SET_SITE_TITLE]: () => {
+				draftState.siteTitle = actions.payload;
 			}
 		};
 		const mapKey = actions.type as keyof typeof map;
 		map[mapKey] && map[mapKey]();
 	});
-	return state;
 }

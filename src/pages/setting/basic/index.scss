@@ -1,0 +1,42 @@
+.theme-grid {
+	display: grid;
+	gap: 16px;
+	padding: 16px 0;
+	grid-template-columns: repeat(6, 1fr);
+	@include respond-to("xs") {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@include respond-to("s") {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	@include respond-to("m") {
+		grid-template-columns: repeat(5, 1fr);
+	}
+	.theme-grid__item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 80px;
+		border-radius: 8px;
+		color: #ffffff;
+		@media (max-width: 800px) {
+			height: 60px;
+		}
+		&.current-theme::before {
+			opacity: 1;
+		}
+		&::before {
+			position: absolute;
+			content: "";
+			top: -4px;
+			left: -4px;
+			right: -4px;
+			bottom: -4px;
+			border: 2px solid var(--border-color);
+			border-radius: 12px;
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+	}
+}

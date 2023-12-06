@@ -1,10 +1,10 @@
 import http from "..";
-import { CheckQrRes, Result } from "../interface";
+import { CheckQrApiRes, Result } from "../interface";
 
 /**
  * 获取登录状态
  */
-export const getLoginState = () => {
+export const getLoginStateApi = () => {
 	return http.get<Result<{ profile: null | {} }>>(
 		"/login/status",
 		{
@@ -17,13 +17,13 @@ export const getLoginState = () => {
 /**
  * 生成二维码 key
  */
-export const getQrKey = () => {
+export const getQrKeyApi = () => {
 	return http.get<Result<{ unikey: string }>>(
 		"/login/qr/key",
 		{
 			timestamp: Date.now()
 		},
-		{ hiddenBar: true }
+		{ hiddenBar: false }
 	);
 };
 
@@ -31,8 +31,8 @@ export const getQrKey = () => {
  * 检查二维码状态
  * @param {string} key 二维码key
  */
-export const checkQr = (key: string) => {
-	return http.get<CheckQrRes>(
+export const checkQrApi = (key: string) => {
+	return http.get<CheckQrApiRes>(
 		"/login/qr/check",
 		{
 			key,

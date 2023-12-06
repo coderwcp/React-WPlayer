@@ -8,12 +8,12 @@ export type Theme = "light" | "dark";
 export type ThemeType = keyof typeof themeTypeData;
 export type ThemeData = {
 	name: string;
-	label: ThemeType;
+	label: ThemeType | "custom";
 	primaryColor: string;
 	primaryColorHover: string;
 	primaryColorSuppl: string;
 	primaryColorPressed: string;
-} | null;
+};
 export type ListClickMode = "click" | "dblclick";
 export type PlayerStyle = "cover";
 export type SongLevel = "exhigh";
@@ -60,7 +60,7 @@ const defaultSettingState: SettingState = {
 	theme: "light",
 	themeAuto: true,
 	themeType: "red",
-	themeData: null,
+	themeData: themeTypeData.red as ThemeData,
 	// 搜索历史
 	searchHistory: true,
 	// 轮播图显示
@@ -132,8 +132,6 @@ export default function site(state = defaultSettingState, action: CustomActionTy
 				break;
 			// 设置主题颜色
 			case types.SET_THEME_DATA:
-				console.log("11", action.payload);
-
 				draftState.themeData = action.payload;
 				break;
 			default:

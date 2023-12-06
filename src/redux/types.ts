@@ -6,3 +6,5 @@ export const SET_USER_DATA = "SET_USER_DATA"; // 设置用户信息
 export const SET_THEME_DATA = "SET_THEME_DATA"; // 设置主题配色
 export const SET_USER_LOGIN = "SET_USER_LOGIN"; // 设置用户登录状态
 export const SET_SEARCH_INPUT_ACTIVE = "SET_SEARCH_INPUT_ACTIVE"; // 设置用户登录状态
+export const SET_SEARCH_HISTORY = "SET_SEARCH_HISTORY"; // 设置搜索历史
+export const SET_SITE_TITLE = "SET_SITE_TITLE"; // 设置搜索历史

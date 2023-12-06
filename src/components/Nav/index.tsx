@@ -2,7 +2,7 @@ import "./index.scss";
 import { StoreState } from "@/redux";
 import { connect } from "react-redux";
 import { AlertOutlined, AppstoreOutlined, HomeOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { Avatar, Button, Dropdown, MenuProps, Space, Typography, Flex } from "antd";
+import { Avatar, Button, Dropdown, MenuProps, Typography, Flex, App } from "antd";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -12,8 +12,14 @@ import { setTheme } from "@/redux/modules/setting/action";
 
 const { Text } = Typography;
 
-function _Nav(props: StoreState & { setTheme: () => any }) {
+type Props = StoreState & { setTheme: () => any };
+
+function _Nav(props: Props) {
+	const { message } = App.useApp();
+	window.$message = message;
+
 	const { language, theme } = props.setting;
+	const { searchInputActive } = props.site;
 	const { setTheme } = props;
 
 	const { userData } = props.user;
@@ -30,6 +36,7 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 
 	const avatar = () => (
 		<Avatar
+			style={{ flexShrink: 0 }}
 			src={userData.avatarUrl ? userData.avatarUrl.replace(/^http:/, "https:") + "?param=60y60" : "/images/ico/user-filling.svg"}
 		/>
 	);
@@ -143,6 +150,7 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 			},
 			setting() {
 				console.log("setting");
+				navigate("/setting/index");
 			},
 			user() {
 				console.log("user");
@@ -165,7 +173,7 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 				<div className="logo">
 					<img src={logoUrl} alt="logo" onClick={() => navigate("/")} />
 				</div>
-				{true && (
+				{!searchInputActive && (
 					<div className="controls">
 						<LeftOutlined style={{ width: "22px", height: "22px" }} />
 						<RightOutlined style={{ width: "22px", height: "22px" }} />
@@ -188,7 +196,7 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 				</Dropdown>
 			</div>
 			<div className="right">
-				<Space wrap size={12}>
+				<Flex gap={12} align="center" style={{ width: "100%" }} justify="flex-end">
 					<SearchInp />
 					<Dropdown className="mb-menu" menu={{ selectable: false, items: mbMenuOptions }} placement="bottom" arrow>
 						<Button shape="circle" icon={<SvgIcon type="icon-menu-line" />} />
@@ -201,7 +209,8 @@ function _Nav(props: StoreState & { setTheme: () => any }) {
 					>
 						{avatar()}
 					</Dropdown>
-				</Space>
+				</Flex>
+				{/* <Space wrap size={12} style={{ width: "100%" }}></Space> */}
 			</div>
 		</nav>
 	);

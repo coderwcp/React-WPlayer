@@ -50,7 +50,7 @@ nav {
 				transition: all 0.3s;
 				@media (min-width: 640px) {
 					&:hover {
-						background-color: pink;
+						background-color: var(--main-color);
 					}
 				}
 				&:active {

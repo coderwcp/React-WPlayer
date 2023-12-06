@@ -5,6 +5,7 @@ export type MusicState = {
 	playState: boolean; // 播放状态
 	persistData: {
 		playlists: any[]; // 播放列表
+		searchHistory: any[]; // 搜索历史
 	};
 };
 

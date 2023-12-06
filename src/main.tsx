@@ -12,7 +12,6 @@ import { message } from "antd";
 
 // 全局对象
 window.$loadingBar = NProgress;
-window.$message = message;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	// <StrictMode>

@@ -1,14 +1,24 @@
 export interface Result<T = any> {
 	code?: number;
-	data: {
-		code: number;
-	} & T;
+	data: T;
+	message?: string;
 }
 
-export interface CheckQrRes {
+export interface CheckQrApiRes {
 	code: number;
 	cookie: string;
 	message: string;
 	avatarUrl: string;
 	nickname: string;
+}
+
+export interface SearchHotItem {
+	alg: string;
+	content: string;
+	iconType: number;
+	iconUrl: string;
+	score: number;
+	searchWord: string;
+	source: number;
+	url: string;
 }

@@ -1,15 +1,16 @@
 import { StoreState } from "@/redux";
 import "./index.scss";
-import { Alert, Flex, Tabs, Typography, QRCode, Skeleton, message } from "antd";
+import { Alert, Flex, Typography, QRCode, Skeleton, message } from "antd";
 import { TabsProps } from "antd/lib";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { setUserLogin, userLogOut } from "@/redux/modules/user/action";
-import { checkQr, getLoginState, getQrKey } from "@/api/modules/login";
+import { checkQrApi, getLoginStateApi, getQrKeyApi } from "@/api/modules/login";
 import { useNavigate } from "react-router-dom";
 import { preciseInterval } from "@/utils/preciseInterval";
-import { CheckQrRes } from "@/api/interface";
+import { CheckQrApiRes } from "@/api/interface";
+import Tabs from "@/components/Tabs";
 
 const { Text } = Typography;
 
@@ -31,7 +32,7 @@ function _Login(props: Props) {
 			key: "qrcode",
 			label: "扫码登录",
 			children: (
-				<Flex vertical={true} align="center" gap={12}>
+				<Flex style={{ marginTop: "30px" }} vertical={true} align="center" gap={12}>
 					{qrImg ? (
 						<QRCode value={qrImg} size={220} color={themeData?.primaryColor} />
 					) : (
@@ -44,19 +45,19 @@ function _Login(props: Props) {
 		{
 			key: "phone",
 			label: "验证码登录",
-			children: <Alert message={"该登录方式暂时无法使用"} type="warning" />
+			children: <Alert style={{ marginTop: "10px" }} message={"该登录方式暂时无法使用"} type="warning" />
 		},
 		{
 			key: "email",
 			label: "邮箱登录",
-			children: <Alert message={"该登录方式暂时无法使用"} type="warning" />
+			children: <Alert style={{ marginTop: "10px" }} message={"该登录方式暂时无法使用"} type="warning" />
 		}
 	];
 
 	const onChange = (key: string) => {
 		const tabHandle = {
 			qrcode() {
-				getQrKeyData();
+				getQrKeyApiData();
 			},
 			phone() {
 				cancelQrCheckInterval();
@@ -71,9 +72,9 @@ function _Login(props: Props) {
 	};
 
 	// 获取二维码登录 key
-	const getQrKeyData = () => {
+	const getQrKeyApiData = () => {
 		// 检测是否登录
-		getLoginState().then(res => {
+		getLoginStateApi().then(res => {
 			if (res.data.profile && window.localStorage.getItem("cookie")) {
 				window.$message.info(t("login.loggedIn"));
 				setUserLogin(true);
@@ -81,10 +82,10 @@ function _Login(props: Props) {
 			} else {
 				userLogOut();
 				cancelQrCheckInterval();
-				getQrKey().then(res => {
+				getQrKeyApi().then(res => {
 					if (res.code == 200) {
 						setQrImg(`https://music.163.com/login?codekey=${res.data.unikey}`);
-						checkQrState(res.data.unikey);
+						checkQrApiState(res.data.unikey);
 					} else {
 						window.$message.error(t("login.qrText6"));
 					}
@@ -96,15 +97,15 @@ function _Login(props: Props) {
 	// 登陆状态弹窗
 	let loginStateMessage: typeof message | null;
 	// 检测二维码登陆状态
-	const checkQrState = (key: string) => {
+	const checkQrApiState = (key: string) => {
 		console.log(key);
 		// 使用方法
 		window.qrCheckInterval = preciseInterval(() => {
 			if (!key) return false;
-			checkQr(key).then(res => {
+			checkQrApi(key).then(res => {
 				const codeMap = {
 					800: () => {
-						getQrKeyData();
+						getQrKeyApiData();
 						loginStateMessage = null;
 						setQrText(t("当前二维码已失效，请重新扫码"));
 					},
@@ -131,11 +132,11 @@ function _Login(props: Props) {
 	};
 
 	// 储存登录信息
-	const saveLoginData = (data: CheckQrRes) => {
+	const saveLoginData = (data: CheckQrApiRes) => {
 		data.cookie = data.cookie.replaceAll(" HTTPOnly", "");
 		// user.setCookie(data.cookie);
 		// // 验证用户登录信息
-		// getLoginState().then(res => {
+		// getLoginStateApi().then(res => {
 		// 	if (res.data.profile) {
 		// 		user.setUserData(res.data.profile);
 		// 		user.userLogin = true;
@@ -148,7 +149,7 @@ function _Login(props: Props) {
 		// 	} else {
 		// 		user.userLogOut();
 		// 		$message.error(t("login.qrText5"));
-		// 		getQrKeyData();
+		// 		getQrKeyApiData();
 		// 	}
 		// });
 	};
@@ -160,10 +161,9 @@ function _Login(props: Props) {
 
 	useEffect(() => {
 		// 页面初始化判断是否是扫码登录
-		activeKey === "qrcode" && getQrKeyData();
+		activeKey === "qrcode" && getQrKeyApiData();
 		window.$message.loading({
-			content: "asdasd",
-			duration: 0
+			content: "asdasd"
 		});
 
 		// 清理定时器

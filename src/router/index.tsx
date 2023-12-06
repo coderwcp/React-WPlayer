@@ -3,10 +3,12 @@ import { RouteObject } from "./interface";
 import NotFound from "@/components/NotFound/index";
 import Home from "@/pages/home";
 import searchRouter from "./modules/search";
+import settingRouter from "./modules/setting";
 import Login from "@/pages/login";
 
 const resolvedModules = {
-	searchRouter
+	searchRouter,
+	settingRouter
 };
 
 export const routerArray: RouteObject[] = [];
@@ -23,11 +25,17 @@ export const rootRouter: RouteObject[] = [
 	},
 	{
 		path: "/home",
-		element: <Home />
+		element: <Home />,
+		meta: {
+			title: "首页"
+		}
 	},
 	{
 		path: "/login",
-		element: <Login />
+		element: <Login />,
+		meta: {
+			title: "登录"
+		}
 	},
 	...routerArray,
 	{ path: "*", element: <NotFound /> }

@@ -1,6 +1,6 @@
 import "./App.scss";
-import { ConfigProvider, Layout, theme as antdTheme, App as AntApp } from "antd";
-import { setLanguage, setTheme, setThemeData } from "@/redux/modules/setting/action";
+import { ConfigProvider, Layout, theme as antdTheme, App as AntApp, Divider } from "antd";
+import { setThemeData } from "@/redux/modules/setting/action";
 import { connect } from "react-redux";
 import { StoreState } from "@/redux";
 import useLanguage from "@/hooks/useLanguage";
@@ -16,7 +16,7 @@ import { AliasToken } from "antd/lib/theme/internal";
 
 const { Header, Content } = Layout;
 
-type Props = StoreState & { setTheme: () => any };
+type Props = StoreState;
 
 function _App(props: Props) {
 	const [themeToken, setThemeToken] = useState<Partial<AliasToken>>();
@@ -79,6 +79,7 @@ function _App(props: Props) {
 					<Layout style={{ height: "100vh", overflow: "hidden", transition: "all  0.3s", paddingBottom: flag ? "70px" : "0" }}>
 						<Header className="layout-header">
 							<Nav></Nav>
+							<Divider />
 						</Header>
 						<Content style={{ flex: 1, overflowY: "auto" }} className="layout-content">
 							<div className="main">
@@ -95,7 +96,7 @@ function _App(props: Props) {
 }
 
 const mapStateToProps = (state: StoreState) => state;
-const mapDispatchToProps = { setLanguage, setTheme };
+const mapDispatchToProps = { setThemeData };
 const App = connect(mapStateToProps, mapDispatchToProps)(_App);
 
 export default App;

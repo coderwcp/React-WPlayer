@@ -6,6 +6,10 @@ export default {
 			artists: "歌手"
 		}
 	},
+	setting: {
+		title: "全局设置",
+		basic: {}
+	},
 	hello: "您好",
 	world: "世界"
 };

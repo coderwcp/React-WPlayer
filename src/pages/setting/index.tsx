@@ -7,11 +7,12 @@ import Tabs from "@/components/Tabs";
 import Basic from "./basic";
 import Plyer from "./plyer";
 import Other from "./other";
+import { useTranslation } from "react-i18next";
 
-type Props = StoreState & {};
+// type Props = StoreState & {};
 
-function _Setting(props: Props) {
-	console.log(props);
+function _Setting() {
+	const { t } = useTranslation();
 
 	const [items] = useState([
 		{
@@ -33,7 +34,7 @@ function _Setting(props: Props) {
 
 	return (
 		<>
-			<Typography.Title>全局设置</Typography.Title>
+			<Typography.Title>{t("setting.title")}</Typography.Title>
 			<Tabs defaultActiveKey="basic" items={items}></Tabs>
 		</>
 	);

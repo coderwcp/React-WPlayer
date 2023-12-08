@@ -6,6 +6,10 @@ export default {
 			artists: "歌手en"
 		}
 	},
+	setting: {
+		title: "Global Setting",
+		basic: {}
+	},
 	hello: "hello",
 	world: "world"
 };

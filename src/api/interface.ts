@@ -22,3 +22,10 @@ export interface SearchHotItem {
 	source: number;
 	url: string;
 }
+
+export interface BannerType {
+	imageUrl: string;
+	targetType: number;
+	targetId: number;
+	url: string;
+}

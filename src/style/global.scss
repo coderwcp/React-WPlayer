@@ -66,6 +66,9 @@ div#nprogress {
 
 	.ant-layout-content {
 		.main {
+			box-sizing: content-box;
+			max-width: 1400px;
+			margin: 0 auto;
 			padding: 24px $padding 54px $padding;
 			.player {
 				padding: 0 $padding;

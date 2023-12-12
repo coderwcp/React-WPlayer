@@ -1,0 +1,60 @@
+.cover-list {
+	display: grid;
+	gap: 0 20px;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(2, auto);
+	grid-auto-rows: 0;
+	overflow: hidden;
+	.cover-list__item {
+		width: 100%;
+		height: 100%;
+		.cover {
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 8px;
+			transition: all 0.3s;
+			cursor: pointer;
+			.cover-img {
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+				border-radius: 8px;
+				transition: filter 0.3s;
+				z-index: 1;
+			}
+			.cover-loading {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 0;
+				padding-bottom: 100%;
+				background-color: #0001;
+			}
+		}
+	}
+	> .ant-card:nth-child(n + 7) {
+		margin-top: 26px;
+	}
+	@include respond-to("m") {
+		grid-template-columns: repeat(5, 1fr);
+		> .ant-card:nth-child(n + 6) {
+			margin-top: 26px;
+		}
+	}
+	@include respond-to("s") {
+		grid-template-columns: repeat(4, 1fr);
+		> .ant-card:nth-child(n + 5) {
+			margin-top: 26px;
+		}
+	}
+	@include respond-to("xs") {
+		grid-template-columns: repeat(3, 1fr);
+		> .ant-card:nth-child(n + 4) {
+			margin-top: 26px;
+		}
+	}
+}

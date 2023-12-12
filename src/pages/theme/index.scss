@@ -12,7 +12,7 @@
 	@include respond-to("m") {
 		grid-template-columns: repeat(5, 1fr);
 	}
-	&__item {
+	.theme-grid__item {
 		position: relative;
 		display: flex;
 		align-items: center;

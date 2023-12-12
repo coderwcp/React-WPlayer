@@ -33,7 +33,7 @@ const Theme = (props: Props) => {
 			});
 		} else {
 			success("主题色更换为 " + data!.name);
-			setThemeType(data!.label);
+			setThemeType(data.label as ThemeType);
 		}
 		setThemeData(data);
 	};
@@ -41,7 +41,7 @@ const Theme = (props: Props) => {
 	return (
 		<>
 			<Text>主题 {themeType}</Text>
-			{themeType !== "red" && <Button onClick={() => changeThemeColor(null, true)}>恢复默认</Button>}
+			{themeType !== "red" && <Button onClick={() => changeThemeColor(themeTypeData["red"] as ThemeData, true)}>恢复默认</Button>}
 			<div className="theme-grid">
 				{Object.keys(themeTypeData).map(key => {
 					const _key = key as ThemeType;
